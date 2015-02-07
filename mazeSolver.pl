@@ -2,8 +2,8 @@ solve(From, To, [From|Path]) :-
 	% helper method so that Next =/= From
 	solveHelper(From, To, Path),
 	!,
-	print(Path),
-	printGrid(Path).
+	printGrid(Path),
+	print(Path).
 
 solveHelper(From, To, [To]) :- 
 	valid(From, To).
