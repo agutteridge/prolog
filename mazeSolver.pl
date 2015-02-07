@@ -1,6 +1,7 @@
 % solve(List1, List2, List3[Lots of Lists])
 solve(From, To, [From|Path]) :-
-	solveHelper(From, To, Path).
+	solveHelper(From, To, Path),
+	!.
 
 solveHelper(To, To, []).
 
@@ -43,5 +44,7 @@ isWithinRange([H|W]) :-
 	getLast(W, Width),
 	mazeSize(_, MaxWidth),
 	=<(Width, MaxWidth),
+	>=(Width, 0),
 	mazeSize(MaxHeight, _),
-	=<(H, MaxHeight).
+	=<(H, MaxHeight),
+	>=(H, 0).
