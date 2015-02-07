@@ -1,28 +1,30 @@
 % solve(List1, List2, List3[Lots of Lists])
+solve(From, To, [From|Path]) :-
+	solveHelper(From, To, Path).
 
-% needed for first call, where first list and head of third list are equal
-solve(From, To, [From|Tail]) :- 
-	isNotBarrier(From),
-	solveHelper(From, To, Tail).
+solveHelper(To, To, []).
 
-solveHelper(From, To, [To|[]]) :- 
-	isNotBarrier(To),
-	isAdjacent(From, To),
-	!.
+solveHelper(From, To, [To]) :- 
+	valid(From, To).
 
 solveHelper(From, To, [Next|Tail]) :-
-	isNotBarrier(Next),
-	isAdjacent(From, Next),
-	solveHelper(Next, To, Tail).
+	solveHelper(Next, To, Tail),
+	valid(From, Next).
+
+valid(From, To) :-
+	isAdjacent(From, To),
+	isWithinRange(From),
+	isWithinRange(To),
+	isNotBarrier(From),
+	isNotBarrier(To).
 
 % subgoal met if point at coordinates (H, W) is not a barrier
-isNotBarrier([H|W]) :- isNotBarrier(H, W).
-isNotBarrier(H,W) :-
+isNotBarrier([H|W]) :-
 	getLast(W, Width),
 	\+(barrier(H, Width)).
 
 % required for isNotBarrier/2
-getLast([T], T) :- !.
+getLast([T|[]], T) :- !.
 getLast([_|Tail], T) :- getLast(Tail, T).
 
 % are 2 points adjacent?
@@ -36,3 +38,10 @@ isAdjacent(H, T1, H, T2) :-
 isAdjacent(H1, T, H2, T) :- 
 	H1 is H2 + 1; 
 	H1 is H2 - 1.
+
+isWithinRange([H|W]) :- 
+	getLast(W, Width),
+	mazeSize(_, MaxWidth),
+	=<(Width, MaxWidth),
+	mazeSize(MaxHeight, _),
+	=<(H, MaxHeight).
