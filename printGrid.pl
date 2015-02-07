@@ -1,0 +1,2 @@
+printGrid :-
+	print("yes").

@@ -1,3 +1,3 @@
-:-	[tests].
+:-  [printGrid].
 :-  [maze].
 :-  [mazeSolver]. 
