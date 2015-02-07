@@ -1,10 +1,13 @@
-solve(From, To, [From|Path]) :-
+solve(From, To, Path) :-
 	% helper method so that Next =/= From
-	solveHelper(From, To, Path),
+	getTail(Path, RestOfPath),
+	solveHelper(From, To, RestOfPath),
 	nl,
 	write('The solution: '), write(Path), nl, nl,
 	printGrid(Path),
 	!.
+
+getTail([_|Tail], Tail).
 
 solveHelper(From, To, [To]) :- 
 	valid(From, To).
