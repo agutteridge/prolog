@@ -1,5 +1,5 @@
+% start of program
 solve(From, To, Path) :-
-	% helper method so that Next =/= From
 	getTail(Path, RestOfPath),
 	solveHelper(From, To, RestOfPath),
 	nl,
@@ -7,11 +7,12 @@ solve(From, To, Path) :-
 	printGrid(Path),
 	!.
 
+% removing the head of a list
 getTail([_|Tail], Tail).
 
+% helper method so that Next =/= From
 solveHelper(From, To, [To]) :- 
 	valid(From, To).
-
 solveHelper(From, To, [Next|Tail]) :-
 	solveHelper(Next, To, Tail),
 	valid(From, Next).
@@ -23,11 +24,6 @@ valid(From, To) :-
 	isWithinRange(To),
 	isNotBarrier(From),
 	isNotBarrier(To).
-
-% is there a barrier at this coordinate?
-isNotBarrier([H|W]) :-
-	getLast(W, Width),
-	\+(barrier(H, Width)).
 
 % are 2 coordinates adjacent?
 isAdjacent([H1|T1], [H2|T2]) :-
@@ -51,6 +47,11 @@ isWithinRange([H|W]) :-
 	=<(H, MaxHeight),
 	>(H, 0).
 
-% fetching tail of a list
+% is there a barrier at this coordinate?
+isNotBarrier([H|W]) :-
+	getLast(W, Width),
+	\+(barrier(H, Width)).
+
+% fetching the last element of a list
 getLast([T|[]], T) :- !.
 getLast([_|Tail], T) :- getLast(Tail, T).
