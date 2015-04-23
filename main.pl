@@ -1,3 +1,3 @@
-:-  [printGrid].
+:-  [print_grid].
 :-  [maze].
-:-  [mazeSolver]. 
+:-  [maze_solver]. 

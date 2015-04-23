@@ -1,4 +1,4 @@
-mazeSize(5, 9). 
+maze_size(5, 9). 
 barrier(1, 8). 
 barrier(2, 1). 
 barrier(2, 2).

@@ -1,7 +1,7 @@
-# prolog
-PPL prolog coursework: maze solver
+# Prolog Assignment: Maze solver
+Prolog coursework component for Programming Paradigms and Languages (14-15).
 
-Instructions:
-Please compile all files from main.pl and write the following predicate: 
+To execute:
 
-solve(From, To, Path).
+1. Compile all files from main.pl and write the following predicate: 
+`solve(From, To, Path).`
